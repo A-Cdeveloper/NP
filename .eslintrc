@@ -1,0 +1,8 @@
+{
+  "extends": "sammy",
+  "rules": {
+    "react-intl-sammy/missing-formatted-message": "off",
+  }
+
+
+}
