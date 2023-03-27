@@ -84,15 +84,30 @@ export const GlobalStyles = React.memo(
     .postItem h3 {
       font-size: 14px;
       margin: 0px 0px 15px 0px;
-      flex: .9
+      flex: .8;
     }
     .postItem h3 a {
-      color:  #F89067;
-      cursor:pointer
+      color:  #123B50;
+      cursor:pointer;
+      border-bottom: 1px solid #ccc;
+      display:block;
+      padding: 5px 40px 5px 0px;
+      text-decoration:none;
+    }
+    .postItem h3 a:hover{
+      color: orangered
     }
     .postItem svg {
-      fill:  #F89067;
-      cursor:pointer
+      fill:  #123B50;
+      cursor:pointer;
+      margin-left: -20px;
+    }
+
+    .user{cursor:pointer}
+    .user:hover,
+    .user.active{
+      background: #123B50;
+      color:white;
     }
 
     button{
@@ -101,9 +116,6 @@ export const GlobalStyles = React.memo(
       cursor:pointer;
       text-decoration:none;
     }
-
- 
-
     form {
       display:flex;
       flex-wrap: wrap;

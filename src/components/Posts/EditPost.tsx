@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { EditPost } from "../../types/globalTypes";
+import { EditPost } from "../../@types/globalTypes.";
+import useValidation from "../../hooks/useValidation";
 
 const EditPost = ({ id, title, body, onEdit }: EditPost) => {
   const navigate = useNavigate();
+  const { isValid, errorMsg: error, validation } = useValidation();
   const [enteredTitle, setEnteredTitle] = useState<string>(title);
   const [enteredBody, setEnteredBody] = useState<string>(body);
 
@@ -20,6 +22,12 @@ const EditPost = ({ id, title, body, onEdit }: EditPost) => {
 
   const editPostHaandler = (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!isValid) {
+      validation(enteredTitle, enteredBody);
+      return;
+    }
+
     onEdit({
       id,
       title: enteredTitle,
@@ -49,6 +57,11 @@ const EditPost = ({ id, title, body, onEdit }: EditPost) => {
         rows={8}
         value={enteredBody}
       />
+      {error ? (
+        <div style={{ flex: 1 }}>
+          <p style={{ color: "red" }}>{error}</p>
+        </div>
+      ) : null}
       <button id="action" type="submit">
         EDIT
       </button>

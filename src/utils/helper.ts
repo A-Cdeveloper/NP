@@ -8,3 +8,11 @@ export const genRandonString = (length: number) => {
   }
   return result;
 };
+
+export const validationInput = (value: string | null) => {
+  let valid = false;
+  if (value && value.trim() !== "") {
+    valid = true;
+  }
+  return valid;
+};

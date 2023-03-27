@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 
+import { User } from "../../@types/globalTypes.";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { deleteUser } from "../../redux/user/userSlice";
-import { User } from "../../types/globalTypes";
 import UserPostsList from "../Posts/UserPostsList";
 
 const SingleUser = ({
@@ -16,7 +16,7 @@ const SingleUser = ({
 }: User) => {
   const dispatch = useAppDispatch();
   const [showUserPosts, setShowUserPosts] = useState(false);
-  const [activeUserId, setActiveUserId] = useState<number>(1);
+  const [activeUserId, setActiveUserId] = useState<number>(0);
 
   const showUserPostsHandler = (uid: number) => {
     setShowUserPosts(!showUserPosts);
@@ -34,9 +34,9 @@ const SingleUser = ({
   return (
     <>
       <tr
+        className={`user ${activeUserId === id ? "active" : ""}`}
         key={id}
         onClick={() => showUserPostsHandler(id)}
-        style={activeUserId === id ? { color: "red" } : { color: "black" }}
       >
         <td>{first_name}</td>
         <td>{last_name}</td>

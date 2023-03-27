@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import useValidation from "../../hooks/useValidation";
 import { addPost } from "../../redux/post/postSlice";
 import { selectUsers } from "../../redux/user/userSlice";
 import { genRandonString } from "../../utils/helper";
@@ -10,6 +11,7 @@ import { genRandonString } from "../../utils/helper";
 const AddPost = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { isValid, errorMsg: error, validation } = useValidation();
 
   const enteredAuthorId = useRef<HTMLSelectElement>(null);
   const enteredTitle = useRef<HTMLTextAreaElement>(null);
@@ -23,6 +25,11 @@ const AddPost = () => {
       enteredAuthorId.current && enteredAuthorId.current.value;
     const postTitle = enteredTitle.current && enteredTitle.current.value;
     const postBody = enteredBody.current && enteredBody.current.value;
+
+    if (!isValid) {
+      validation(postTitle, postBody);
+      return;
+    }
 
     dispatch(
       addPost({
@@ -62,6 +69,12 @@ const AddPost = () => {
         ref={enteredBody}
         rows={8}
       />
+
+      {error ? (
+        <div style={{ flex: 1 }}>
+          <p style={{ color: "red" }}>{error}</p>
+        </div>
+      ) : null}
       <button type="submit">SUBMIT</button>
     </form>
   );
