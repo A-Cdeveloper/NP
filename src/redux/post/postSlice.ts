@@ -20,14 +20,16 @@ export const postSlice = createSlice({
   name: "post",
   initialState,
   reducers: {
+    addPost: (state, { payload }) => {
+      state.postsList = [...state.postsList, payload];
+    },
     editPost: (state, { payload }) => {
       const { id, title, body } = payload;
       const elementEditIndex = state.postsList.findIndex(
-        (post) => post.id !== id,
+        (post) => post.id === id,
       );
       state.postsList[elementEditIndex].title = title;
       state.postsList[elementEditIndex].body = body;
-
     },
     deletePost: (state, { payload }) => {
       state.postsList = state.postsList.filter((post) => post.id !== payload);
@@ -46,4 +48,4 @@ export const postSlice = createSlice({
 export default postSlice.reducer;
 
 export const selectPosts = (state: RootState) => state.post.postsList;
-export const { deletePost, editPost } = postSlice.actions;
+export const { deletePost, editPost, addPost } = postSlice.actions;

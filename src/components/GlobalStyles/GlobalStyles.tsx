@@ -33,6 +33,10 @@ export const GlobalStyles = React.memo(
       color: "red";
     }
 
+    h1{
+      text-align:center;
+    }
+
     .pagination {
       display: flex;
       justify-content: center;
@@ -94,20 +98,29 @@ export const GlobalStyles = React.memo(
     button{
       display:block;
       padding: 5px 15px;
+      cursor:pointer;
+      text-decoration:none;
     }
+
+ 
 
     form {
       display:flex;
       flex-wrap: wrap;
     }
-    input, textarea {
-      width: 100%!important;
+    label{width: 100%;}
+
+    input, textarea,select {
+      width: 100%;
       border: 1px solid #ccc;
       height: auto;
       display:block;
       margin-bottom: 20px;
       padding: 10px;
       margin-top:4px
+    }
+    select{
+      width: 50%;
     }
   `}`,
 );

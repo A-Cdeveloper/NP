@@ -20,7 +20,6 @@ export interface EditPost {
   title: string;
   body: string;
   onEdit: ({
-    id,
     title,
     body,
   }: {

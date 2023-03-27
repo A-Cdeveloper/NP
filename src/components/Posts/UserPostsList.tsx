@@ -19,19 +19,21 @@ const UserPostsList = ({ id }: { id: number }) => {
     <tr>
       <td colSpan={5}>
         <div className="postsList">
-          {userPosts
-            ? userPosts.map((post) => (
-                <div className="postItem" key={post.id}>
-                  <h3>
-                    <Link to={`blog/${post.title}`}>{post.title}</Link>
-                  </h3>
-                  <AiFillDelete
-                    onClick={() => deletePostHandler(post.id)}
-                    size={22}
-                  />
-                </div>
-              ))
-            : null}
+          {userPosts.length !== 0 ? (
+            userPosts.map((post) => (
+              <div className="postItem" key={post.id}>
+                <h3>
+                  <Link to={`blog/${post.id}`}>{post.title}</Link>
+                </h3>
+                <AiFillDelete
+                  onClick={() => deletePostHandler(post.id)}
+                  size={22}
+                />
+              </div>
+            ))
+          ) : (
+            <strong>The user has not posted yet.</strong>
+          )}
         </div>
       </td>
     </tr>

@@ -16,9 +16,15 @@ const SingleUser = ({
 }: User) => {
   const dispatch = useAppDispatch();
   const [showUserPosts, setShowUserPosts] = useState(false);
+  const [activeUserId, setActiveUserId] = useState<number>(1);
 
-  const showUserPostsHandler = () => {
+  const showUserPostsHandler = (uid: number) => {
     setShowUserPosts(!showUserPosts);
+    if (!showUserPosts) {
+      setActiveUserId(uid);
+    } else {
+      setActiveUserId(0);
+    }
   };
 
   const deleteUserHandler = (user_id: number) => {
@@ -27,10 +33,12 @@ const SingleUser = ({
 
   return (
     <>
-      <tr key={id} onClick={showUserPostsHandler}>
-        <td>
-          {first_name} - {id}
-        </td>
+      <tr
+        key={id}
+        onClick={() => showUserPostsHandler(id)}
+        style={activeUserId === id ? { color: "red" } : { color: "black" }}
+      >
+        <td>{first_name}</td>
         <td>{last_name}</td>
         <td>{email}</td>
         <td>{gender}</td>

@@ -2,21 +2,24 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { GlobalStyles } from "../components/GlobalStyles/GlobalStyles";
 import SinglePost from "../components/Posts/SinglePost";
 
 const StyledWrapper = styled.div`
   padding: 24px;
-  text-align: center;
+  max-width: 50%;
+  margin: auto;
 `;
 
 const Post = () => {
-  const params = useParams<{ post_title: string }>();
+  const params = useParams<{ post_id: string }>();
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const post_title: string = params.post_title!;
+  const post_id: string = params.post_id!;
 
   return (
     <StyledWrapper>
-      <SinglePost post_title={post_title} />
+      <GlobalStyles />
+      <SinglePost post_id={post_id} />
     </StyledWrapper>
   );
 };

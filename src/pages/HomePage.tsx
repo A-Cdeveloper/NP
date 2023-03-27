@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { GlobalStyles } from "../components/GlobalStyles/GlobalStyles";
@@ -20,7 +21,7 @@ const HomePage = () => {
   const users = useTypedSelector(selectUsers);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(100);
+  const [usersPerPage, setUsersPerPage] = useState(50);
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -43,22 +44,27 @@ const HomePage = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchUsers());
+  // }, []);
 
   useEffect(() => {
-    // if (init) {
-    dispatch(fetchPosts());
-    // }
-    // init = false;
-  }, [currentPage]);
+    if (init) {
+      dispatch(fetchUsers());
+      dispatch(fetchPosts());
+      init = false;
+    }
+  }, []);
 
   return (
     <StyledWrapper>
       <GlobalStyles />
 
       <h1>Authors List</h1>
+
+      <p>
+        <Link to="/blog/new">Add new post</Link>
+      </p>
 
       <table>
         <thead>
